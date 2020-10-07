@@ -1,14 +1,46 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
 
-    <script type="module" src="/build/stencil-starter-project-name.esm.js"></script>
-    <script nomodule src="/build/stencil-starter-project-name.js"></script>
-  </head>
-  <body>
-    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
-  </body>
+  <script type="module"
+          src="/build/stencil-starter-project-name.esm.js"></script>
+  <script nomodule src="/build/stencil-starter-project-name.js"></script>
+</head>
+<body>
+
+  <script>
+    customElements.define('blur-test',
+      class BlurTest extends HTMLElement {
+        connectedCallback() {
+          this.attachShadow({
+            mode: 'open',
+          });
+
+          this.shadowRoot.innerHTML =
+            `<div id="fake-host">
+              <input id="input" placeholder="focus here first" />
+              <button>then click here</button>
+            </div>
+            `;
+
+          this.shadowRoot.getElementById('fake-host')
+            .addEventListener('blur', (event) => console.log('blur-test::host blur', event));
+
+          this.shadowRoot.getElementById('input')
+            .addEventListener('blur', (event) => console.log('blur-test::input blur', event));
+        }
+      });
+  </script>
+
+  <h3>Native custom element</h3>
+
+  <blur-test></blur-test>
+
+  <h3>Stencil component</h3>
+  <my-component ></my-component>
+</body>
 </html>

@@ -1,32 +1,24 @@
-import { Component, Prop, h } from '@stencil/core';
-import { format } from '../../utils/utils';
+import { Component, Host, h } from "@stencil/core";
 
 @Component({
-  tag: 'my-component',
-  styleUrl: 'my-component.css',
-  shadow: true,
+  tag: "my-component",
+  shadow: true
 })
 export class MyComponent {
-  /**
-   * The first name
-   */
-  @Prop() first: string;
+  handleHostBlur(event: FocusEvent): void {
+    console.log("my-component::host blur", event);
+  }
 
-  /**
-   * The middle name
-   */
-  @Prop() middle: string;
-
-  /**
-   * The last name
-   */
-  @Prop() last: string;
-
-  private getText(): string {
-    return format(this.first, this.middle, this.last);
+  handleInputBlur(event: FocusEvent): void {
+    console.log("my-component::input blur", event);
   }
 
   render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+    return (
+      <Host onBlur={this.handleHostBlur}>
+        <input onBlur={this.handleInputBlur} placeholder="focus here first" />
+        <button>then click here</button>
+      </Host>
+    );
   }
 }
