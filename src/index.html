@@ -42,5 +42,17 @@
 
   <h3>Stencil component</h3>
   <my-component ></my-component>
+
+  <p>Basic HTML</p>
+  <div id='basic-host'>
+    <input id="basic-input" placeholder="focus here first" />
+    <button>then click here</button>
+  </div>
+  <script>
+    document.getElementById('basic-host')
+      .addEventListener('blur', (event) => console.log('vanilla::host blur', event));
+    document.getElementById('basic-input')
+      .addEventListener('blur', (event) => console.log('vanilla-input::blur', event));
+  </script>
 </body>
 </html>
