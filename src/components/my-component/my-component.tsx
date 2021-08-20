@@ -15,9 +15,11 @@ export class MyComponent {
 
   render() {
     return (
-      <Host onBlur={this.handleHostBlur}>
-        <input onBlur={this.handleInputBlur} placeholder="focus here first" />
-        <button>then click here</button>
+      <Host>
+        <div onBlur={this.handleHostBlur}>
+          <input onBlur={this.handleInputBlur} placeholder="focus here first" />
+          <button>then click here</button>
+        </div>
       </Host>
     );
   }
